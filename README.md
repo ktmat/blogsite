@@ -19,5 +19,5 @@ The website is intended for me to collate my thoughts on a variety of topics. Th
 ## Questions?
 
 For any questions, you can contact me at these locations.
-- [Email](kai@matolat.com)
+- [Email](mailto:kai@matolat.com)
 - [X](https://www.x.com/kai2036)
