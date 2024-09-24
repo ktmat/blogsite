@@ -15,6 +15,6 @@ The website is intended for me to collate my thoughts on a variety of topics. Th
 ## Questions?
 
 For any questions, you can contact me at these locations.
-<kai@matolat.com>
-<https://www.x.com/@kai2036>
-<https://www.matolat.com>
+[Email]: <kai@matolat.com>
+[X]: <https://www.x.com/@kai2036>
+[Website]: <https://www.matolat.com>
