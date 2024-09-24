@@ -12,6 +12,10 @@ The website is intended for me to collate my thoughts on a variety of topics. Th
 - History
 - Computing
 
+## TODO
+1. Create postgreSQL server with table for post data. (Author, postID, timestamp, subject)
+2. Create posting system in Go
+
 ## Questions?
 
 For any questions, you can contact me at these locations.
