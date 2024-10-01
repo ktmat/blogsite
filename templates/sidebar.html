@@ -1,0 +1,13 @@
+<aside class="sidebar left-sidebar">
+    <a href="/"><img src="/static/images/yourlogo.jpg" /></a>
+    {{ range .Categories }}
+  <h2>{{ .Name }}</h2>
+  <ul>
+    {{ range .Pages }}
+      <li class="{{ if eq .Slug $.CurrentSlug }}active{{ end }}">
+        <a href="/{{ .Slug }}">{{ .Title }}</a>
+      </li>
+    {{ end }}
+  </ul>
+{{ end }}
+</aside>

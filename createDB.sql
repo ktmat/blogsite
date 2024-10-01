@@ -1,3 +1,0 @@
-CREATE DATABASE matolatsite;
-
-CREATE TABLE posts

@@ -1,1 +1,14 @@
 /bin/
+*.exe
+*.dll
+*.exe~
+*.so
+*.dylib
+*.test
+*.out
+go.work
+# vendor/
+.DS_Store
+._.DS_Store
+**/.DS_Store
+**/._.DS_Store
