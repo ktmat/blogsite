@@ -15,9 +15,7 @@ Lists:
 
 2) List item 2
 
-A meme in markdown format:
 
-![rust](/static/images/rust.png)
 
 ## A cool info box
 
