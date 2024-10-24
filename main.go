@@ -153,6 +153,39 @@ func refreshMarkdownData() {
 }
 
 func setupRoutes(r *gin.Engine) {
+	// single route for the home page
+	r.GET("/", func(c *gin.Context) {
+		indexPath := "./markdown/index.md"
+		indexContent, err := os.ReadFile(indexPath)
+		if err != nil {
+			log.Printf("Error occurred during operation: %v\n", err)
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+			return
+		}
+
+		post, err := parseMarkdownFile(indexContent)
+		if err != nil {
+			log.Printf("Error occurred during operation: %v\n", err)
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+			return
+		}
+
+		sidebarLinks := createSidebarLinks(post.Headers)
+
+		c.HTML(http.StatusOK, "index.html", gin.H{
+			"Title":                   post.Title,
+			"Content":                 post.Content,
+			"SidebarData":             sidebarData,
+			"Headers":                 post.Headers,
+			"SidebarLinks":            sidebarLinks,
+			"CurrentSlug":             post.Slug,
+			"MetaDescription":         post.MetaDescription,
+			"MetaPropertyTitle":       post.MetaPropertyTitle,
+			"MetaPropertyDescription": post.MetaPropertyDescription,
+			"MetaOgURL":               post.MetaOgURL,
+		})
+	})
+
 	for _, post := range currentPosts {
 		localPost := post
 		if localPost.Slug != "" {

@@ -6,7 +6,7 @@ MetaPropertyTitle: Philosophy
 MetaDescription: Parent site of the Philosophy subject.
 MetaOgURL: https://matolat.com/philosophy
 ---
-# My Experience with Philosophy
+# Reading List
 I am currently undertaking the reading of the following:
 
 * Capital: Volume I (Karl Marx)
