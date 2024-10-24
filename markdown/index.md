@@ -16,8 +16,6 @@ This blog is just used for me to dump my thoughts on stuff pertaining to:
 
 * Economics 
 
-* Religion 
-
 * Technology 
 
 * History

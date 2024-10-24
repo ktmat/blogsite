@@ -54,20 +54,33 @@ type Category struct {
 	Order int
 }
 
-var BaseURL = "http://localhost:8080"
+//var BaseURL = "http://localhost:8080"
+
+var (
+	BaseURL   = "http://localhost:8080"
+	currentPosts []BlogPost
+	sidebarData  SidebarData
+)
 
 func main() {
 	gin.SetMode(gin.ReleaseMode)
 
 	r := gin.Default()
 
-	// sidebar data
-	sidebarData, err := loadSidebarData("./markdown")
+	// Load initial sidebar data
+	var err error
+	sidebarData, err = loadSidebarData("./markdown")
 	if err != nil {
-		log.Fatal(err) // I think this one is ok
+		log.Fatal(err)
 	}
 
-	// register the sidebar template as a partial
+	// Load initial posts
+	currentPosts, err = loadMarkdownPosts("./markdown")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Register the sidebar template as a partial
 	r.SetFuncMap(template.FuncMap{
 		"loadSidebar": func() SidebarData {
 			return sidebarData
@@ -75,75 +88,24 @@ func main() {
 		"dict": dict,
 	})
 
-	// load in the templates
+	// Load HTML templates
 	r.LoadHTMLGlob("templates/*")
 
-	// serve static assets
+	// Serve static assets
 	r.Static("/static", "./static")
 
-	// load and parse markdown files
-	posts, err := loadMarkdownPosts("./markdown")
-	if err != nil {
-		log.Fatal(err) // i think this fatal is ok
-	}
-
-	// single route for the home page
-	r.GET("/", func(c *gin.Context) {
-		indexPath := "./markdown/index.md"
-		indexContent, err := os.ReadFile(indexPath)
-		if err != nil {
-			log.Printf("Error occurred during operation: %v\n", err)
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
-			return
+	// Start server in a goroutine
+	go func() {
+		if err := r.Run(); err != nil {
+			log.Fatalf("Failed to run server: %v", err)
 		}
+	}()
 
-		post, err := parseMarkdownFile(indexContent)
-		if err != nil {
-			log.Printf("Error occurred during operation: %v\n", err)
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
-			return
-		}
+	// Start a goroutine to listen for console input
+	go listenForCommands()
 
-		sidebarLinks := createSidebarLinks(post.Headers)
-
-		c.HTML(http.StatusOK, "index.html", gin.H{
-			"Title":                   post.Title,
-			"Content":                 post.Content,
-			"SidebarData":             sidebarData,
-			"Headers":                 post.Headers,
-			"SidebarLinks":            sidebarLinks,
-			"CurrentSlug":             post.Slug,
-			"MetaDescription":         post.MetaDescription,
-			"MetaPropertyTitle":       post.MetaPropertyTitle,
-			"MetaPropertyDescription": post.MetaPropertyDescription,
-			"MetaOgURL":               post.MetaOgURL,
-		})
-	})
-
-	// routes for each blog post, based of of Slug following the /
-	for _, post := range posts {
-		localPost := post
-		if localPost.Slug != "" {
-			sidebarLinks := createSidebarLinks(localPost.Headers)
-			r.GET("/"+localPost.Slug, func(c *gin.Context) {
-				c.HTML(http.StatusOK, "layout.html", gin.H{
-					"Title":                   localPost.Title,
-					"Content":                 localPost.Content,
-					"SidebarData":             sidebarData,
-					"Headers":                 localPost.Headers,
-					"Description":             localPost.Description,
-					"SidebarLinks":            sidebarLinks,
-					"CurrentSlug":             localPost.Slug,
-					"MetaDescription":         localPost.MetaDescription,
-					"MetaPropertyTitle":       localPost.MetaPropertyTitle,
-					"MetaPropertyDescription": localPost.MetaPropertyDescription,
-					"MetaOgURL":               localPost.MetaOgURL,
-				})
-			})
-		} else {
-			log.Printf("Warning: Post titled '%s' has an empty slug and will not be accessible via a unique URL.\n", localPost.Title)
-		}
-	}
+	// Set up routes
+	setupRoutes(r)
 
 	r.NoRoute(func(c *gin.Context) {
 		c.HTML(http.StatusNotFound, "404.html", gin.H{
@@ -151,7 +113,87 @@ func main() {
 		})
 	})
 
-	r.Run()
+	// Block the main goroutine
+	select {}
+}
+
+func listenForCommands() {
+	for {
+		var command string
+		_, err := fmt.Scanln(&command)
+		if err != nil {
+			log.Println("Error reading input:", err)
+			continue
+		}
+		if command == "refreshMD" {
+			log.Println("Refreshing markdown files...")
+			refreshMarkdownData()
+		}
+	}
+}
+
+func refreshMarkdownData() {
+	// Reload posts
+	newPosts, err := loadMarkdownPosts("./markdown")
+	if err != nil {
+		log.Printf("Error refreshing markdown posts: %v", err)
+		return
+	}
+	currentPosts = newPosts
+
+	// Reload sidebar data
+	newSidebarData, err := loadSidebarData("./markdown")
+	if err != nil {
+		log.Printf("Error refreshing sidebar data: %v", err)
+		return
+	}
+	sidebarData = newSidebarData
+
+	log.Println("Markdown files refreshed successfully.")
+}
+
+func setupRoutes(r *gin.Engine) {
+	for _, post := range currentPosts {
+		localPost := post
+		if localPost.Slug != "" {
+			// Define the route for each post
+			r.GET("/"+localPost.Slug, func(c *gin.Context) {
+				// Find the current post based on the slug
+				var currentPost *BlogPost
+				for _, post := range currentPosts {
+					if post.Slug == localPost.Slug {
+						currentPost = &post
+						break
+					}
+				}
+
+				if currentPost == nil {
+					c.String(http.StatusNotFound, "Post not found")
+					return
+				}
+
+				// Create sidebar links for the current post
+				sidebarLinks := createSidebarLinks(currentPost.Headers)
+
+				// Render the post with the most current data
+				c.HTML(http.StatusOK, "layout.html", gin.H{
+					"Title":                   currentPost.Title,
+					"Content":                 currentPost.Content,
+					"SidebarData":             sidebarData,
+					"Headers":                 currentPost.Headers,
+					"Description":             currentPost.Description,
+					"SidebarLinks":            sidebarLinks,
+					"CurrentSlug":             currentPost.Slug,
+					"MetaDescription":         currentPost.MetaDescription,
+					"MetaPropertyTitle":       currentPost.MetaPropertyTitle,
+					"MetaPropertyDescription": currentPost.MetaPropertyDescription,
+					"MetaOgURL":               currentPost.MetaOgURL,
+				})
+			})
+		} else {
+			log.Printf("Warning: Post titled '%s' has an empty slug and will not be accessible via a unique URL.\n", localPost.Title)
+		}
+	}
 }
 
 func loadMarkdownPosts(dir string) ([]BlogPost, error) {
