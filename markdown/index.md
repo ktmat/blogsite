@@ -4,7 +4,7 @@ Parent: Intro
 Order: 1
 MetaPropertyTitle: Home Page
 MetaDescription: This is the home page of the blog site.
-MetaOgURL: https://matolat.com/home
+MetaOgURL: https://matolat.com/
 ---
 # Welcome to the blog.
 
