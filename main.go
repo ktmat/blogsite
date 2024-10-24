@@ -125,7 +125,7 @@ func listenForCommands() {
 			log.Println("Error reading input:", err)
 			continue
 		}
-		if command == "refreshMD" {
+		if command == "refreshMD" || command == "refreshmd" || command == "REFRESHMD" {
 			log.Println("Refreshing markdown files...")
 			refreshMarkdownData()
 		}
