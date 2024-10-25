@@ -22,7 +22,7 @@
 body, html {
     height: 100%;
     margin: 0;
-    font-family: 'Arial';
+    font-family: 'Arial'; /* 'JetBrains Mono', monospace; */
     background-color: #181c1f;
     color: #cccccc;
     line-height: 1.6;
