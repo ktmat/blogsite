@@ -22,7 +22,7 @@
 body, html {
     height: 100%;
     margin: 0;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Segoe UI', monospace;
     background-color: #181c1f;
     color: #cccccc;
     line-height: 1.6;
