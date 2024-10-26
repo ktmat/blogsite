@@ -1,20 +1,20 @@
 @font-face {
-    font-family: 'Arial';
-    /*src: url('/static/webfonts/JetBrainsMono-Light.woff2') format('woff2');*/
+    font-family: 'Montserrat';
+    src: url('/static/font/Montserrat-Light.ttf') format('ttf');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'Arial';
-    /*src: url('/static/webfonts/JetBrainsMono-ExtraBold.woff2') format('woff2');*/
+    font-family: 'Montserrat';
+    src: url('/static/font/Montserrat-ExtraBold.tff') format('ttf');
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'Arial';
-    /*src: url('/static/webfonts/JetBrainsMono-LightItalic.woff2') format('woff2');*/
+    font-family: 'Montserrat';
+    src: url('/static/font/Montserrat-LightItalic.ttf') format('ttf');
     font-weight: bold;
     font-style: italic;
 }
@@ -22,7 +22,7 @@
 body, html {
     height: 100%;
     margin: 0;
-    font-family: 'Arial'; /* 'JetBrains Mono', monospace; */
+    font-family: 'Montserrat'; /* 'JetBrains Mono', monospace; */
     background-color: #181c1f;
     color: #cccccc;
     line-height: 1.6;
