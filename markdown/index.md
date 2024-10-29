@@ -1,5 +1,5 @@
 Title: Home
-Slug: home
+Slug: 
 Parent: Intro
 Order: 1
 MetaPropertyTitle: Home Page
@@ -22,7 +22,7 @@ This blog is just used for me to dump my thoughts on stuff pertaining to:
 
 * Multipolarity
 
-You can access the contents of the blog site on the right-hand side of the website as well as on the left-hand side.
+This blog will also serve as the basis of a new [**Eureka Society**](https://x.com/Eureka_Coll), intended for the university I attend. Further information will be provided at a later date.
 
 <!-- <div class="info-box">
   <p><i class="fa-solid fa-circle-info" style="color: #638be3;"></i>

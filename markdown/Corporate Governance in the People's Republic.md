@@ -14,7 +14,7 @@ Outlines how China is able to exert influence over both state-owned and non-stat
 
 Corporate Social Credit is the way the CPC can detect whether a SOE or non-SOE can enact on their promises. The score is used to regulate the private sector and continue to clamp down on potential exploitative behaviour that may be undergone..
 
-Social "credit" can also be translated from Chinese as being social *trustworthiness*.
+Social *"credit"* can also be translated from Chinese as being social *trustworthiness*.
 
 The score is given to private firms, with real punishments and drawbacks for whom fail to achieve a high score.
 
