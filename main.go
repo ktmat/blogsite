@@ -57,18 +57,27 @@ type Category struct {
 //var BaseURL = "http://localhost:8080"
 
 var (
-	BaseURL   = "http://localhost:8080"
+	BaseURL      = "http://localhost:8080"
 	currentPosts []BlogPost
 	sidebarData  SidebarData
 )
 
 func main() {
+	file, err := os.OpenFile("gin.log", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0666)
+	if err != nil {
+		log.Fatalf("Failed to open log file: %v", err)
+	}
+	defer file.Close()
+
+	// Set Gin's default logger to write to the file
+	gin.DefaultWriter = file
+	gin.DefaultErrorWriter = file
+
 	gin.SetMode(gin.ReleaseMode)
 
 	r := gin.Default()
 
 	// Load initial sidebar data
-	var err error
 	sidebarData, err = loadSidebarData("./markdown")
 	if err != nil {
 		log.Fatal(err)
