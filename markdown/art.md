@@ -16,6 +16,9 @@ MetaOgURL: https://matolat.com/ART
 ![victory](/static/images/art/victory.jpeg)
 ![newsovman](/static/images/art/newsovietman.jpeg)
 
+### Lenin
+![lenin](/static/images/art/lenin.jpeg)
+
 ### Stalin
 ![stalin](/static/images/art/stalin.jpeg)
 ![stalinbanneroflenin](/static/images/art/stalinbanneroflenin.jpeg)
