@@ -6,6 +6,8 @@ MetaPropertyTitle: RTSG Corporate Governance in the People's Republic Notes
 MetaDescription: Notes on the article from RTSG regarding the corporate governance in the People's Republic of China.
 MetaOgURL: https://matolat.com/rtsgcgprc
 ---
+![gucciCommunism](/static/images/guccicommunism.jpg)
+
 https://www.rtsg.media/p/corporate-governance-in-the-peoples
 
 Outlines how China is able to exert influence over both state-owned and non-state-owned enterprises.
