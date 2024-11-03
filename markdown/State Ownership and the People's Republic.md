@@ -6,6 +6,8 @@ MetaPropertyTitle: RTSG State Ownership and the People's Republic
 MetaDescription: Notes on the article from RTSG regarding the state ownership within the People's Republic of China.
 MetaOgURL: https://matolat.com/rtsgsoprc
 ---
+**This is a note, this is not my own publication. All rights go to RTSG Media.**
+
 https://www.rtsg.media/p/state-ownership-and-the-peoples-republic
 
 It is misconceived by both leftists and rightists that the People's Republic of China has ceased to plan its economy, and that it had *adopted capitalism*. Due to reform and opening up. The information that is available on the Western internet on reform and opening up in the PRC is sparse. No evidence on how State-Owned-Enterprises (SOEs) function, nor do they elaborate how proliferated SOEs are.
