@@ -100,5 +100,10 @@ MetaOgURL: https://matolat.com/ART
 ## DPRK
 ![russiadprk](/static/images/art/russiadprk.jpeg)
 
+## Cuba
+
+### Che
+![che](/static/images/art/che.jpeg)
+
 ## Communism
 ![algeria](/static/images/art/algeriancommunistparty.jpeg)
