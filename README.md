@@ -13,8 +13,7 @@ The website is intended for me to collate my thoughts on a variety of topics. Th
 - Computing
 
 ## TODO
-1. Create postgreSQL server with table for post data. (Author, postID, timestamp, subject)
-2. Create posting system in Go
+1. Checkout Ponzu as a content management system, specifically for posting new markdown articles without having to bring the server down.
 
 ## Questions?
 
