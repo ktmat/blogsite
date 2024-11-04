@@ -28,7 +28,7 @@ MetaOgURL: https://matolat.com/ART
 
 ### Putin
 ![putinstalin](/static/images/art/putinstalin.jpeg)
-![putinvisitdprk](/static/images/art/putinvisittodprk.jpeg)
+![putinvisitdprk](/static/images/art/putinsvisittodprk.jpeg)
 ![putinkim](/static/images/art/putinandkim.jpeg)
 
 ## East Germany (GDR)
