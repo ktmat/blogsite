@@ -162,7 +162,14 @@ func refreshMarkdownData() {
 }
 
 func setupRoutes(r *gin.Engine) {
-	// single route for the home page
+	// ADMIN PAGE
+	r.GET("/notanadminpage", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "admin.html", gin.H{
+			"Title": "admin",
+		})
+	})
+
+	// HOME PAGE
 	r.GET("/", func(c *gin.Context) {
 		indexPath := "./markdown/index.md"
 		indexContent, err := os.ReadFile(indexPath)

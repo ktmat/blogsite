@@ -157,3 +157,18 @@
 [GIN] 2024/11/04 - 14:11:06 | 200 |     1.60075ms |             ::1 | GET      "/"
 [GIN] 2024/11/04 - 14:11:09 | 200 |     430.083µs |             ::1 | GET      "/Art"
 [GIN] 2024/11/04 - 14:11:09 | 200 |    5.047291ms |             ::1 | GET      "/static/images/art/che.jpeg"
+[GIN] 2024/11/04 - 14:16:13 | 200 |     934.709µs |             ::1 | GET      "/"
+[GIN] 2024/11/04 - 14:16:17 | 200 |       1.667µs |             ::1 | GET      "/notanadminpage"
+[GIN] 2024/11/04 - 14:16:17 | 404 |     158.208µs |             ::1 | GET      "/favicon.ico"
+[GIN] 2024/11/04 - 14:17:41 | 200 |      83.208µs |             ::1 | GET      "/notanadminpage"
+Error #01: html/template: "admin.html" is undefined
+[GIN] 2024/11/04 - 14:17:42 | 200 |      46.792µs |             ::1 | GET      "/notanadminpage"
+Error #01: html/template: "admin.html" is undefined
+[GIN] 2024/11/04 - 14:17:43 | 200 |       32.75µs |             ::1 | GET      "/notanadminpage"
+Error #01: html/template: "admin.html" is undefined
+[GIN] 2024/11/04 - 14:17:50 | 200 |     911.583µs |             ::1 | GET      "/"
+[GIN] 2024/11/04 - 14:17:54 | 200 |       53.75µs |             ::1 | GET      "/notanadminpage"
+Error #01: html/template: "admin.html" is undefined
+[GIN] 2024/11/04 - 14:18:18 | 200 |       108.5µs |             ::1 | GET      "/notanadminpage"
+[GIN] 2024/11/04 - 14:18:19 | 200 |       35.25µs |             ::1 | GET      "/notanadminpage"
+[GIN] 2024/11/04 - 14:18:43 | 200 |      33.959µs |             ::1 | GET      "/notanadminpage"
