@@ -63,7 +63,7 @@ var (
 )
 
 func main() {
-	file, err := os.OpenFile("gin.log", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0666)
+	file, err := os.OpenFile("/logs/gin.log", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0666)
 	if err != nil {
 		log.Fatalf("Failed to open log file: %v", err)
 	}
@@ -418,14 +418,14 @@ func loadSidebarData(dir string) (SidebarData, error) {
 func createSidebarLinks(headers []string) template.HTML {
 	var linksHTML string
 	for _, header := range headers {
-		sanitizedHeader := sanitizeHeaderForID(header)
-		link := fmt.Sprintf(`<li><a href="#%s">%s</a></li>`, sanitizedHeader, header)
+		sanitisedHeader := sanitiseHeaderForID(header)
+		link := fmt.Sprintf(`<li><a href="#%s">%s</a></li>`, sanitisedHeader, header)
 		linksHTML += link
 	}
 	return template.HTML(linksHTML)
 }
 
-func sanitizeHeaderForID(header string) string {
+func sanitiseHeaderForID(header string) string {
 	// lowercase
 	header = strings.ToLower(header)
 
