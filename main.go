@@ -62,6 +62,8 @@ var (
 	sidebarData  SidebarData
 )
 
+var indexPost BlogPost
+
 func main() {
 	file, err := os.OpenFile("logs/gin.log", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0666)
 	if err != nil {
@@ -88,6 +90,17 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	 // Load index.md once during server initialization
+	 indexContent, err := os.ReadFile("./markdown/index.md")
+	 if err != nil {
+		 log.Fatalf("Error loading index.md: %v", err)
+	 }
+ 
+	 indexPost, err = parseMarkdownFile(indexContent)
+	 if err != nil {
+		 log.Fatalf("Error parsing index.md: %v", err)
+	 }
 
 	// Register the sidebar template as a partial
 	r.SetFuncMap(template.FuncMap{
@@ -142,6 +155,20 @@ func listenForCommands() {
 }
 
 func refreshMarkdownData() {
+	// Reload index.md
+	indexContent, err := os.ReadFile("./markdown/index.md")
+	if err != nil {
+		log.Printf("Error refreshing index.md: %v", err)
+		return
+	}
+
+	newIndexPost, err := parseMarkdownFile(indexContent)
+	if err != nil {
+		log.Printf("Error parsing refreshed index.md: %v", err)
+		return
+	}
+	indexPost = newIndexPost
+
 	// Reload posts
 	newPosts, err := loadMarkdownPosts("./markdown")
 	if err != nil {
@@ -171,34 +198,19 @@ func setupRoutes(r *gin.Engine) {
 
 	// HOME PAGE
 	r.GET("/", func(c *gin.Context) {
-		indexPath := "./markdown/index.md"
-		indexContent, err := os.ReadFile(indexPath)
-		if err != nil {
-			log.Printf("Error occurred during operation: %v\n", err)
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
-			return
-		}
-
-		post, err := parseMarkdownFile(indexContent)
-		if err != nil {
-			log.Printf("Error occurred during operation: %v\n", err)
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
-			return
-		}
-
-		sidebarLinks := createSidebarLinks(post.Headers)
+		sidebarLinks := createSidebarLinks(indexPost.Headers)
 
 		c.HTML(http.StatusOK, "index.html", gin.H{
-			"Title":                   post.Title,
-			"Content":                 post.Content,
-			"SidebarData":             sidebarData,
-			"Headers":                 post.Headers,
-			"SidebarLinks":            sidebarLinks,
-			"CurrentSlug":             post.Slug,
-			"MetaDescription":         post.MetaDescription,
-			"MetaPropertyTitle":       post.MetaPropertyTitle,
-			"MetaPropertyDescription": post.MetaPropertyDescription,
-			"MetaOgURL":               post.MetaOgURL,
+		"Title":                   indexPost.Title,
+        "Content":                 indexPost.Content,
+        "SidebarData":             sidebarData,
+        "Headers":                 indexPost.Headers,
+        "SidebarLinks":            sidebarLinks,
+        "CurrentSlug":             indexPost.Slug,
+        "MetaDescription":         indexPost.MetaDescription,
+        "MetaPropertyTitle":       indexPost.MetaPropertyTitle,
+        "MetaPropertyDescription": indexPost.MetaPropertyDescription,
+        "MetaOgURL":               indexPost.MetaOgURL,
 		})
 	})
 
@@ -452,3 +464,4 @@ func dict(values ...interface{}) (map[string]interface{}, error) {
 	}
 	return dict, nil
 }
+
