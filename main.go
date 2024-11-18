@@ -195,16 +195,16 @@ func setupRoutes(r *gin.Engine) {
 		sidebarLinks := createSidebarLinks(indexPost.Headers)
 
 		c.HTML(http.StatusOK, "index.html", gin.H{
-		"Title":                   indexPost.Title,
-        "Content":                 indexPost.Content,
-        "SidebarData":             sidebarData,
-        "Headers":                 indexPost.Headers,
-        "SidebarLinks":            sidebarLinks,
-        "CurrentSlug":             indexPost.Slug,
-        "MetaDescription":         indexPost.MetaDescription,
-        "MetaPropertyTitle":       indexPost.MetaPropertyTitle,
-        "MetaPropertyDescription": indexPost.MetaPropertyDescription,
-        "MetaOgURL":               indexPost.MetaOgURL,
+			"Title":                   indexPost.Title,
+			"Content":                 indexPost.Content,
+			"SidebarData":             sidebarData,
+			"Headers":                 indexPost.Headers,
+			"SidebarLinks":            sidebarLinks,
+			"CurrentSlug":             indexPost.Slug,
+			"MetaDescription":         indexPost.MetaDescription,
+			"MetaPropertyTitle":       indexPost.MetaPropertyTitle,
+			"MetaPropertyDescription": indexPost.MetaPropertyDescription,
+			"MetaOgURL":               indexPost.MetaOgURL,
 		})
 	})
 
