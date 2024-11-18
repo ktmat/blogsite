@@ -7,6 +7,7 @@ MetaDescription: Notes on the article from RTSG regarding the state ownership wi
 MetaOgURL: https://matolat.com/rtsgsoprc
 ---
 **This is a note, this is not my own publication. All rights go to RTSG Media.**
+[redsquare](/static/images/red.png)
 
 https://www.rtsg.media/p/state-ownership-and-the-peoples-republic
 
