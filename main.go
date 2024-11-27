@@ -11,6 +11,7 @@ MetaDescription: Description ~ 150 - 200 words of the page for SEO.
 MetaPropertyDescription: SHORT description for social media sharing.
 MetaOgURL: https://www.matolat.com/slug-of-url
 */
+import _ "personalpage/tzinit"
 
 import (
 	"errors"
@@ -23,6 +24,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+
 
 	"github.com/gin-gonic/gin"
 	"github.com/gomarkdown/markdown"
