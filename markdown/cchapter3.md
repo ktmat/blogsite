@@ -15,7 +15,7 @@ x = 0;
 i++;
 printf(...);
 ```
-## 3.3 Else-IF
+## 3.3 Else-If
 To illustrate a three-way decision, here is the binary search function implementation in C.
 ```c
 int binarySearch(int x, int v[], int n) {
@@ -33,7 +33,7 @@ int binarySearch(int x, int v[], int n) {
             return mid;
         }
     }
-    return - 1;
+    return -1;
 }
 ```
 The fundamental decision is whether ```x``` is less than, greather than, or equal to the middle element ```v[mid]``` at each step; this is natural for ```else-if```.
