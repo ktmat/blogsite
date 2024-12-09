@@ -78,6 +78,6 @@ x = *pa;
 ```
 will copy the contents of ```a[0]``` into ```x```.
 
-If ```pa``` points to a particular element of an arary, then by definition ```pa+1``` points to the next element, ```pa+1``` points ```i``` elements after ```pa```, and ```pa-i``` points ```i``` elements before. Thus, if ```pa``` points to ```a[0]```, ```*(pa+1)``` refers to the contents of ```a[1]```, ```pa+i``` is the address of ```a[i]```, and ```*(pa+i)``` is the contents of ```a[i]```.
+If ```pa``` points to a particular element of an array, then by definition ```pa+1``` points to the next element, ```pa+1``` points ```i``` elements after ```pa```, and ```pa-i``` points ```i``` elements before. Thus, if ```pa``` points to ```a[0]```, ```*(pa+1)``` refers to the contents of ```a[1]```, ```pa+i``` is the address of ```a[i]```, and ```*(pa+i)``` is the contents of ```a[i]```.
 
 ![pointerarray](static/images/pointerarray.png)
