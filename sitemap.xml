@@ -1,26 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 
-                            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-    <url>
-        <loc>https://matolat.com/</loc>
-        <lastmod>2024-11-26T23:39:17+00:00</lastmod>
-        <priority>1.00</priority>
-    </url>
-    <url>
-        <loc>https://matolat.com/reading</loc>
-        <lastmod>2024-11-26T23:39:17+00:00</lastmod>
-        <priority>0.80</priority>
-    </url>
-    <url>
-        <loc>https://matolat.com/RTSGCGPRC</loc>
-        <lastmod>2024-11-26T23:39:17+00:00</lastmod>
-        <priority>0.70</priority>
-    </url>
-    <url>
-        <loc>https://matolat.com/RTSGSOPRC</loc>
-        <lastmod>2024-11-26T23:39:17+00:00</lastmod>
-        <priority>0.70</priority>
-    </url>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+<url>
+  <loc>https://matolat.com/</loc>
+  <lastmod>2024-12-10T03:10:19+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://matolat.com/reading</loc>
+  <lastmod>2024-12-10T03:10:19+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://matolat.com/RTSGCGPRC</loc>
+  <lastmod>2024-12-10T03:10:19+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://matolat.com/RTSGSOPRC</loc>
+  <lastmod>2024-12-10T03:10:19+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://matolat.com/Relearning%20C%20-%20Chapter%201</loc>
+  <lastmod>2024-12-10T03:10:19+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://matolat.com/Relearning%20C%20-%20Chapter%202</loc>
+  <lastmod>2024-12-10T03:10:19+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://matolat.com/Relearning%20C%20-%20Chapter%203</loc>
+  <lastmod>2024-12-10T03:10:19+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://matolat.com/Relearning%20C%20-%20Chapter%204</loc>
+  <lastmod>2024-12-10T03:10:19+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://matolat.com/Relearning%20C%20-%20Chapter%205</loc>
+  <lastmod>2024-12-10T03:10:19+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+
 </urlset>
+
