@@ -4,7 +4,7 @@ Parent: C Programming
 Order: 10
 MetaPropertyTitle: Relearning C - Chapter 5 Notes
 MetaDescription: Notes on the C Programming Language, Chapter 5 notetaking.
-MetaOgURL: https://matolat.com/cchap4
+MetaOgURL: https://matolat.com/cchap5
 ---
 # Chapter 5 - Pointers and Arrays
 A pointer is a variable that contains the address of a variable.
