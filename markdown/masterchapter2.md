@@ -103,3 +103,138 @@ C treats ```a``` in this expression as a pointer that points to the element at r
 ![pointerarithmeticreference](static/images/pointerarithmeticreference.png)
 
 ### Pointers as Parameters to Functions
+Pointers are an essential part of calling functions in C. Most importantly, they are used to support a type of parameter passing called *call-by-referencing*. In call-by-reference parameter passing, when a function changes a parameter passed to it, the change persists after the function returns. Contrast this with *call-by-value* parameter passing, in which changes to parameters persist only within the funciton itself. Pointers are also an efficient means of passing large amounts of data in and out of functions, whether we plan to modify the data or not. This method is efficient because only a pointer is passed instead of a complete copy of the data.
+
+### Call-by-Reference Parameter Passing
+Formally, C supports only call-by-value parameter passing. In call-by-value parameter passing, private copies of a function's calling parameters are made for the function to use as it executes. However, we can simulate call-by-reference parameter passing by passing pointers to parameters instead of passing the parameters themselves. Using this approach, a function gets a private copy of a pointer to each parameter in the caller's environment.
+
+To understand how this works, first consider *swap1*, which illustrates an incorrect implementation of a function to swap two integers using call-by-value parameter passing without pointers. The function *swap2* corrects the problem by using pointers to simulate call-by-reference parameter passing.
+
+#### Incorrect Swap
+```c
+void swap1(int x, int y) {
+    int tmp;
+    tmp = x;
+    x = y;
+    y = tmp;
+    return;
+}
+```
+#### Correct Swap
+```c
+void swap2(int *x, int *y) {
+    int tmp;
+    tmp = *x;
+    *x = *y;
+    *y = tmp;
+    return;
+}
+```
+In *swap1*, we are merely just swapping around local copies of the variables, without actually affecting the values of the variables we wanted to swap in the first place!
+
+#### Array Reference
+```c
+int f1(int a[]) {
+    a[0] = 5;
+    return 0;
+}
+```
+#### Pointer Reference
+```c
+int f2(int *a) {
+    *a = 5;
+    return 0;
+}
+```
+The approach chosen depends on convention, and or wanting to convey something about how the parameter is used in the function. When using an array parameter, bounds information is often omitted since it is not required by the compiler. However, including bounds information can be a useful way to document a limit the function imposes on a parameter internally. Bounds information plays a more critical role with array parameters that are multidimensional.
+
+When defining a function that accepts a multidimensional array, all but the first dimension must be specified so that pointer arithmetic can be performed when elements are accessed, as shown in the following code:
+```c
+int g(int a[][2]) {
+    a[2][0] = 5;
+    return 0;
+}
+```
+To understand why we must include all but the first dimension, imagine a two-dimensional array of integers with three rows and two columns. In C, elements are stored in row-major order at increasing addresses in memory. This means that the two integers in the first row are stored first, followed by the two integers in the second row, followed by the two integers of the third row. Therefore, to access an element in any row but the first, we must know exactly how many elements to skip in each row to get to elements in the successive rows.
+
+![writing5torow2](static/images/writing5torow2.png)
+
+### Pointers to Pointers as Parameters
+One situation in which pointers are used as parameters to functions is when a function must modify a pointer passed into it. To do this, the function is passed a *pointer to the pointer* to be modified. Consider the operation *list_rem_next*. Upon return, ```data``` points to the data removed from the list:
+```c
+int list_rem_next(List *list, ListElmt *element, void **data);
+```
+Since the operation must modify the pointer ```data``` to make it point to the data removed, we must pass the address of the pointer ```data``` in order to simulate call-by-reference parameter passing. Thus, the operation takes a pointer to a pointer as its third parameter. This is typical of how data is removed from most data structures.
+
+![functionmodifypointer](static/images/functionmodifypointer.png)
+
+## Generic Pointers and Casts
+Recall that pointer variables in C have types just like other variables. The main reason for this is so that when we dereference a pointer, the compiler knows the type of data being pointed to and can access the data accordingly. However, sometimes we are not concerned about the type of data a pointer references. In these cases we use generic pointers, which bypass C's type system.
+
+### Generic Pointers
+Normally C allows assignments only between pointers of the same type. For example, given a character poointer ```sptr``` (a string) and an integer pointer ```iptr```, we are not permitted to assign ```sptr``` to ```iptr``` or ```iptr``` to ```sptr```. However, generic pointers can be set to pointers of any type, and vice versa. Thus, given a generic pointer ```gptr```, we are permitted to assign ```sptr``` to ```gptr``` or ```gptr``` to ```sptr```. To make a pointer generic in C, we declare it as a void pointer.
+
+There are many situations in which void pointers are useful. For example, consider the standard C library function *memcpy*, which copies a block of data from one location in memory to another. Because *memcpy* may be used to copy data of any type, it makes sense that its pointer parameters are void pointers. Void pointers can be used to make other types of functions more generic as well. For example, we might have implemented the *swap2* function presented earlier so that it swapped data of any typ, as shown in the following code:
+```c
+#include <stdlib.h>
+#include <stdio.h>
+
+int swap2(void *x, void *y, int size) {
+    void *tmp;
+
+    if ((tmp = malloc(size)) == NULL) {
+        return -1;
+    }
+
+    memcpy(tmp, x, size);
+    memcpy(x, y, size);
+    memcpy(y, tmp, size);
+    free(tmp);
+    return 0;
+}
+```
+Void pointers are particularly useful when implementing data structures because they allow us to store and retrieve data of any type. Consider again the ```ListElmt``` structure presented earlier for linked lists. Recall that this structure contains two members, ```data``` and ```next```. Since ```data``` is declared as a void pointer, it can point to data of any type. Thus, we can use ```ListElmt``` structures to build any type of list.
+
+One of the operations defined for linked lists is *list_ins_next*, which accepts a void pointer to the data to be inserted:
+```c
+int list_ins_next(List *list, ListElmt *element, void *data);
+```
+To insert an integer referenced by ```iptr``` into a list of integers, ```list```, after an element referenced by ```element```, we use the following call. C permits us to pass the integer pointer ```iptr``` for the parameter ```data``` because ```data``` is a void pointer.
+```c
+returnvalue = list_ins_next(&list, element, iptr);
+```
+When removing data from the list, it is important to use the correct type of pointer to retrieve the data removed. Doing so ensures that the data will be interpreted correctly if we try to do something with it. The operation for removing an element from a linked list is *list_rem_next*, which takes a pointer to a void pointer as its third parameter:
+```c
+int list_rem_next(List *list, ListElmt *element, void **data);
+```
+To remove an integer from ```list``` after an element referenced by ```element```, we use the following call. Upon return, ```iptr``` points to the data removed. We pass the address of the pointer ```iptr``` since the operation modifies the pointer itself to make it point to the data removed.
+```c
+returnvalue = list_rem_next(&list, element, (void **)&iptr);
+```
+This call also includes a *cast* to make ```iptr``` temporarily appear as a pointer to a void pointer, since this is what *list_rem_next* requries. As we will see in the next section, casting is a mechanism in C that lets us temporarily treat a variable of one type as a variable of another type. A cast is necessary here because, although a void pointer is compatible with any other type of pointer in C, a pointer to a void pointer is not.
+
+### Casts
+To cast a variable ```t``` of some type ```T``` to another type ```S```, we precede ```t``` with ```S``` in paranthesis. For example, to assign an integer pointer ```iptr``` to a floating-point pointer ```fptr```, we cast ```iptr``` to a floating-point pointer and then carry out the assignment, as shown:
+```c
+fptr = (float *)iptr;
+```
+After the assignment, ```iptr``` and ```fptr``` both contain the same address. However, the interpretation of the data at this address depends on which pointer we use to access it.
+
+Casts are especially important with generic pointers because generic pointers cannot be dereferenced without casting them to some other type. This is because generic pointers give the compiler no information about what is being pointed to; thus, it is not clear how many bytes should be accessed, nor how the bytes should be interpreted. Casts are also a nice form of self-documentation when generic pointers are assigned to pointers of other types. Although the cast is not necessary in this case, it does improve a program's readability.
+
+When casting pointers, one issue we need to be particularly sensitive to is the way data is aligned in memory. Specifically, we need to be aware that applying casts to pointers can undermine the alignment a computer expects. Often computers have alignment requriements so that certain hardware optimisations can make accessing memory mroe efficient. For example, a system may insist that all integers be aligned on word boundaries. Thus, given a void pointer that is not word aligned, if we cast the void pointer to an integer pointer and dereference it, we can expect an exception to occur at runtime.
+
+## Function Pointers
+Function pointers are pointers that, instead of pointing to data, point to executable code or to blocks of information needed to invoke executable code. They are used to store and manage functions as if they were pieces of data. Function pointers have a type that is described in terms of a return value and parameters that the function accepts. Declarations for function pointers look much like declarations for functions, except that an asterisk (*) appears before the function name, and the asterisk and name a surrounded by parentheses for reasons of associativity. For example, in the following code, ```match``` is declared as a pointer to a function that accepts two void pointers and returns an integer:
+```c
+int (*match)(void *key1, void *key2);
+```
+This declaration means that we can set ```match``` to point to any function that accepts two void pointers and returns an integer. For example, suppose *match_int* is a function that accepts two void pointers to integers and returns 1 if the integers match, or 0 otherwise. Assuming the previous declaration, we could set ```match``` to point to this function by executing the following statement:
+```c
+match = match_int;
+```
+To execute a function referenced by a function pointer, we simply use the function pointer wherever we would normally use the function itself. For example, to invoke the function referenced by ```match``` earlier, we execute the following statement, assuming ```x```, ```y```, and ```returnvalue``` have been declared as integers:
+```c
+returnvalue = match(&x, &y);
+```
+One important use of function pointers is to encapsulate functions into data structures. For example, in the implementation of chained hash tables, the data structure has a ```match``` member similar to the function pointer just described This pointer is used to invoke a function whenever we need to determine whether an element we are searching for matches an element in the table. We assign a function to this pointer when the table is intiialised. The function we assign has the same prototype as ```match``` but internally compares two elements of the appropriate type, depending on the type of data in the table for which the table has been defined. Using a pointer to store a function as part of a data structure is nice because it is yet another way to keep an implementation generic.
