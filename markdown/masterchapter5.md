@@ -34,9 +34,9 @@ Singly-linked list, usually called linked lists, are composed of individual elem
 To access an elemment in a linked list, we start at the head of the list and use the *next* pointers of successive elements to move from element to element until the desired element is reached. With singly-linked lists, the list can be traversed in only one direction -- from head to tail -- because each element contains no link to its predecessor. Therefore, if we start at the head and move to some element, and then wish to access an element preceding it, we must start over at the head (although sometimes we can anticipate the need to know an element and save a pointer to it). Often this weakness is not a concern. When it is, we use a doubly-linked list, or circular list.
 
 Conceptually, one thinks of a linked list as a series of continguous elements. However, because these elements are allocated dynamically (using *malloc* in C), it is important to remember that, in actuality, they are usually scattered about in memory. The pointers from element to eleent therefore are the only means by which we can ensure that all elements remain accessible. With this in mind, we will see later that special care is required when it comes to maintaining the links. If we mistakenly drop one link, it becomes impossible to access any of the elements from that point on in the list. Thus, the expression "You are only as strong as your weakest link" is particularly fitting for linked lists.
-![linkedlist](/static/iamges/linkedlist.png)
+![linkedlist](/static/images/linkedlist.png)
 
-![linkedlistscattered](/static/iamges/linkedlistscattered.png)
+![linkedlistscattered](/static/images/linkedlistscattered.png)
 
 ## Interface for Linked Lists
 
@@ -201,7 +201,7 @@ The runtime complexity of list_destroy is $O(n)$, where n is teh number of eleme
 The ```list_ins_next``` operation inserts an element into a linked lists just after a specified element. The call sets the new element to point to the data passed by the caller. The actual process of inserting the new element into the list is a simple one, but it does require some care. There are two cases to consider: insertion at the head of the list and insertion elsewhere.
 
 Generally, to insert an element into a linked list, we set the ```next``` pointer of the new element to point to the element it is going to precede, and we set the ```next``` pointer of the element that will precede the new element to point to the new element. However, when inserting at the head of a list, there is no element that will precede the new element. Thus, in this case, we set the ```next``` pointer of the new element to the current head of the list, then reset the head of the list to point to the new element. Recall from the interface design in the previous section that passing NULL for ```element``` indicates that the new element should be inserted at the head. In addition to these tasks, whenever we insert an element at the tail of the list, we must update the ```tail``` member of the list data structure to point to the new tail. Last, we update the size of the list by incremmenting its ```size``` member.
-![insertelementLL](/static/iamges/insertelementLL.png)
+![insertelementLL](/static/images/insertelementLL.png)
 
 The runtime complexity of ```list_ins_next``` is $O(1)$ because all of the steps in inserting an element into a linked list run in a constant amount of time.
 
@@ -211,7 +211,7 @@ The ```list_rem_next``` operation removes from a linked list the element just af
 As with inserting an element, this call requires consideration of two cases: removing an element from the head of the list and removing one elsewhere.
 
 The actual process of removing the element from the list is a simple one, but it too requires some care. Generally, to remove an element from a linked list, we set the ```next``` pointer of the element preceding the one being removed to point to the element after the element being removed. However, when removing an element from the head of a list, there is no element that precedes the element being removed. Thus, in this case, we set the head of the list to point to the elmeent after the one being removed. As with insertion, NULL serves nicely as a sentinel passed in ```element``` to indicate that the element at the head of the list should be removed. In addition to these tasks, whenever we remove the element at the tail of the list, we must update the ```tail``` member of the list data structure to point to the new tail, or to NULL if removing the element has caused the list to become empty. Last, we update the size of the list by decreasing the ```size``` member by 1. Upon return, ```data``` points to the data from the element removed.
-![removeelement](/static/iamges/removeelement.png)
+![removeelement](/static/images/removeelement.png)
 
 The runtime complexity of ```list_rem_next``` is $O(1)$ because all of the steps in removing an element from a linked list run in a constant amount of time.
 
@@ -318,7 +318,7 @@ int list_rem_next(List *list, ListElmt *element, void **data) {
 ```
 ## Linked List Example: Frame Management
 An application of linked lists can be found in the way some systems support virtual memory. Virtual memory is a mappping of address space that allows a process to execute without being completely in physical memory; the real memory of the system. One advantage of this is that a process can make use of an address space that is much larger than that which the physical memory of the system would allow otherwise. Another advantage is that multiple processes can share the memory of the system while running concurrently.
-![virtmemsys](/static/iamges/virtmemsys.png)
+![virtmemsys](/static/images/virtmemsys.png)
 
 ```c
 // Implementation of Functions for managing frames

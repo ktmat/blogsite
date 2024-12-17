@@ -166,7 +166,7 @@ int list_rem_next(List *list, ListElmt *element, void **data);
 ```
 Since the operation must modify the pointer ```data``` to make it point to the data removed, we must pass the address of the pointer ```data``` in order to simulate call-by-reference parameter passing. Thus, the operation takes a pointer to a pointer as its third parameter. This is typical of how data is removed from most data structures.
 
-![functionmodifypointer](/static/iamges/functionmodifypointer.png)
+![functionmodifypointer](/static/images/functionmodifypointer.png)
 
 ## Generic Pointers and Casts
 Recall that pointer variables in C have types just like other variables. The main reason for this is so that when we dereference a pointer, the compiler knows the type of data being pointed to and can access the data accordingly. However, sometimes we are not concerned about the type of data a pointer references. In these cases we use generic pointers, which bypass C's type system.
