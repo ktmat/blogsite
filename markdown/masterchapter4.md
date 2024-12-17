@@ -8,10 +8,13 @@ MetaOgURL: https://matolat.com/masteringchap4
 ---
 # Chapter 4 - Analysis of Algorithms
 This chapter covers:
+
 - *Worst-case analysis*
     - The metric used by which most algorithms are compared Other cases we might consider are the average case and the best case. However, worst-case analysis usually offers several advantages.
+    
 - *$O$-notation*
     - The most common notation used to formally express an algorithm's performance. $O$-notation is used to express the upper bound of a function within a constant factor.
+    
 - *Computational complexity*
     - The growth rate of the resources (usually time) an algorithm requries with respect to the size of the data it processes. $O$-notation is a formal expression of an algorithm's complexity.
 
