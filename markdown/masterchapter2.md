@@ -16,7 +16,7 @@ As with other types of variables, we should not assume that a pointer points any
 
 ## Storage Allocation
 When we declare a pointer in C, a certain amount of space is allocated for it, just as for other types of variables. Pointers generally occupy one machine word, but their size can vary.
-![pointerops](/static/iamges/pointerops.png)
+![pointerops](/static/images/pointerops.png)
 Therefore, for portability, we should never assume that a pointer has a specific size. Pointers often vary in size as a result of compiler settings and type specifiers allowed by certain C implementations. It is also important to remember that when we declare a pointer, space is allocated only for the pointer itself; no space is allocated for the data the pointer references. Storage for the data is allocated in one of two ways: by declaring a variable for it or by allocating storage dynamically at runtime (using *malloc* or *realloc*, for example).
 
 When we declare a variable, its type tells the compiler how much storage to set aside for it as the program runs. Storage for the variable is allocated automatically, but it may not be persistent throughout the life of the program. This is especially important to remember when dealing with pointers to *automatic variables*. Automatic variables are those for which storage is allocated and deallocated automatically when entering and leaving a block or function. For example, since ```iptr``` is set to the address of the automatic variable ```a``` in the following function $f$, ```iptr``` becomes a dangling pointer when $f$ returns. This situation occurs because once $f$ returns, ```a``` is no longer valid on the program stack.
@@ -38,7 +38,7 @@ int g(int **iptr) {
     return 0;
 }
 ```
-![pointeropsdynamic](/static/iamges/pointeropsdynamic.png)
+![pointeropsdynamic](/static/images/pointeropsdynamic.png)
 
 Pointers and storage allocation are arguably the areas of C that provide the most fodder for the language's sometimes bad reputation. The misuse of dynamically allocated storage, in particular, is a notorious source of *memory leaks* Memory leaks are blocks of storage that are allocated but never freed by a program, even when no longer in use. They are particularly detrimental when found in sections of code that are executed repeatedly. Fortunately, we can greatly reduce memory leaks by employing consistent approaches to how we manage storage.
 
@@ -100,7 +100,7 @@ C treats ```a``` in this expression as a pointer that points to the element at r
 ```c
 *(*(a + i) + j);
 ```
-![pointerarithmeticreference](/static/iamges/pointerarithmeticreference.png)
+![pointerarithmeticreference](static/images/pointerarithmeticreference.png)
 
 ### Pointers as Parameters to Functions
 Pointers are an essential part of calling functions in C. Most importantly, they are used to support a type of parameter passing called *call-by-referencing*. In call-by-reference parameter passing, when a function changes a parameter passed to it, the change persists after the function returns. Contrast this with *call-by-value* parameter passing, in which changes to parameters persist only within the funciton itself. Pointers are also an efficient means of passing large amounts of data in and out of functions, whether we plan to modify the data or not. This method is efficient because only a pointer is passed instead of a complete copy of the data.
@@ -157,7 +157,7 @@ int g(int a[][2]) {
 ```
 To understand why we must include all but the first dimension, imagine a two-dimensional array of integers with three rows and two columns. In C, elements are stored in row-major order at increasing addresses in memory. This means that the two integers in the first row are stored first, followed by the two integers in the second row, followed by the two integers of the third row. Therefore, to access an element in any row but the first, we must know exactly how many elements to skip in each row to get to elements in the successive rows.
 
-![writing5torow2](/static/iamges/writing5torow2.png)
+![writing5torow2](/static/images/writing5torow2.png)
 
 ### Pointers to Pointers as Parameters
 One situation in which pointers are used as parameters to functions is when a function must modify a pointer passed into it. To do this, the function is passed a *pointer to the pointer* to be modified. Consider the operation *list_rem_next*. Upon return, ```data``` points to the data removed from the list:
