@@ -100,7 +100,7 @@ C treats ```a``` in this expression as a pointer that points to the element at r
 ```c
 *(*(a + i) + j);
 ```
-![pointerarithmeticreference](static/images/pointerarithmeticreference.png)
+![pointerarithmeticreference](/static/images/pointerarithmeticreference.png)
 
 ### Pointers as Parameters to Functions
 Pointers are an essential part of calling functions in C. Most importantly, they are used to support a type of parameter passing called *call-by-referencing*. In call-by-reference parameter passing, when a function changes a parameter passed to it, the change persists after the function returns. Contrast this with *call-by-value* parameter passing, in which changes to parameters persist only within the funciton itself. Pointers are also an efficient means of passing large amounts of data in and out of functions, whether we plan to modify the data or not. This method is efficient because only a pointer is passed instead of a complete copy of the data.
