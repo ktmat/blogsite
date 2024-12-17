@@ -34,9 +34,9 @@ Singly-linked list, usually called linked lists, are composed of individual elem
 To access an elemment in a linked list, we start at the head of the list and use the *next* pointers of successive elements to move from element to element until the desired element is reached. With singly-linked lists, the list can be traversed in only one direction -- from head to tail -- because each element contains no link to its predecessor. Therefore, if we start at the head and move to some element, and then wish to access an element preceding it, we must start over at the head (although sometimes we can anticipate the need to know an element and save a pointer to it). Often this weakness is not a concern. When it is, we use a doubly-linked list, or circular list.
 
 Conceptually, one thinks of a linked list as a series of continguous elements. However, because these elements are allocated dynamically (using *malloc* in C), it is important to remember that, in actuality, they are usually scattered about in memory. The pointers from element to eleent therefore are the only means by which we can ensure that all elements remain accessible. With this in mind, we will see later that special care is required when it comes to maintaining the links. If we mistakenly drop one link, it becomes impossible to access any of the elements from that point on in the list. Thus, the expression "You are only as strong as your weakest link" is particularly fitting for linked lists.
-![linkedlist](static/images/linkedlist.png)
+![linkedlist](/static/images/linkedlist.png)
 
-![linkedlistscattered](static/images/linkedlistscattered.png)
+![linkedlistscattered](/static/images/linkedlistscattered.png)
 
 ## Interface for Linked Lists
 
@@ -317,3 +317,256 @@ int list_rem_next(List *list, ListElmt *element, void **data) {
 }
 ```
 ## Linked List Example: Frame Management
+An application of linked lists can be found in the way some systems support virtual memory. Virtual memory is a mappping of address space that allows a process to execute without being completely in physical memory; the real memory of the system. One advantage of this is that a process can make use of an address space that is much larger than that which the physical memory of the system would allow otherwise. Another advantage is that multiple processes can share the memory of the system while running concurrently.
+![virtmemsys](/static/images/virtmemsys.png)
+
+```c
+// Implementation of Functions for managing frames
+
+#include <stdlib.h>
+#include "frames.h"
+#include "list.h"
+
+// alloc_frames
+int alloc_frame(List *frames) {
+    int frame_nubmer, *data;
+
+    if (list_size(frames) == 0) {
+        return -1; // no frames available
+    } else {
+        if (list_rem_next(frames, NULL, (void **)&data) != 0) {
+            // Return that a frame could not be retrieved.
+            return -1;
+        } else {
+            // Store the number of the available frame.
+            frame_number = *data;
+            free(data);
+        }
+    }
+    return frame_number;
+}
+
+// free_frame
+int free_frame(List *frames, int frame_number) {
+    int *data;
+
+    // Allocate storage for the frame number.
+    if ((data = (int *)malloc(sizeof(int))) == NULL) {
+        return -1;
+    }
+    // Put the frame back in the list of available frames.
+    *data = frame_number; 
+    if (list_ins_next(frames, NULL, data) != 0) {
+        return -1;
+    }
+    return 0;
+}
+```
+## Description of Doubly-Linked Lists
+Doubly-linked lists are composed of elements linked by two pointers. Each element of a doubly-linked list consists of three parts: in addition to the data and the next pointer, each element includes a pointer to the previous element, called the prev pointer. A doubly-linked lists is formed by composing a number of elements so that the next pointer of each element pointers to the element that follows it, and the prev pointer points to the element preceding it. To mark the head and tail of the list, we set the prev pointer of the first element and the next pointer of the last element to NULL.
+
+To traverse backward through a doubly-linked list, we use the prev pointers of consecutive elements in the tail-to-head direction. Thus, for the cost of an additional pointer for each element, a doubly-linked list offers greater flexibility than a singly-linked lists in moving about the list. This can be useful when we know something about where an element might be stored in the list and can choose wisely how to move to it. For example, one flexibility that doubly-linked lists provide is a more intuitive means of removing an element than singly-linked lists.
+
+## Interface for Doubly-Linked Lists
+**dlist_init**
+```c
+void dlist_init(DList *list, void (*destroy)(void *data));
+```
+**Return Value:** None.
+
+**Description:** Initialises the doubly-linked list specified by ```list```. This operation must be called for a doubly-linked list before the list can be used with any other operation. The ```destroy``` argument provides a way to free dynamically allocated data when ```dlist_destroy``` is called. It works in a manner similar to that described for ```list_destroy```. For a doubly-linked list containing data that should not be freed, ```destroy``` should be set to NULL.
+
+**Complexity:** O(1)
+
+
+
+### Implementation and Analysis of Doubly Linked Lists
+```c
+// Header for the Doubly-Linked List Abstract Datatype
+// dlist.h
+#ifndef DLIST_H
+#define DLIST_H
+
+#include <stdlib.h>
+
+// Define a structure for doubly-linked list elements.
+typedef struct DListElmt_ {
+    void *data;
+    struct DListElmt_ *prev;
+    struct DListElmt_ *next;
+} DListElmt;
+
+// Define a structure for doubly-linked lists.
+
+typedef struct DList_ {
+    int size;
+    int (*match)(const void *key1, const void *key2);
+    void (*destroy)(void *data);
+    DListElmt *head;
+    DListElmt *tail;
+} DList;
+// Public Interface
+void dlist_init(DList *list, void (*destroy)(void *data));
+
+void dlist_destroy(DList *list);
+
+int dlist_ins_next(DList *list, DListElmt *element, const void *data);
+
+int dlist_ins_prev(DList *list, DListElmt *element, const void *data);
+
+int dlist_remove(DList *list, DListElmt *element, void **data);
+
+#define dlist_size(list) ((list)->size)
+
+#define dlist_head(list) ((list)->head)
+
+#define dlist_tail(list) ((list)->tail)
+
+#define dlist_is_head(element) ((element)->prev == NULL ? 1 : 0)
+
+#define dlist_is_tail(element) ((element)->next == NULL ? 1 : 0)
+
+#define dlist_data(element) ((element)->data)
+
+#define dlist_next(element) ((element)->next)
+
+#define dlist_prev(element) ((element)->prev)
+
+#endif
+```
+Here is how you make use of the above definitions.
+```c
+// dlist.c
+#include <stdlib.h>
+#include <string.h>
+
+#include "dlist.h"
+
+// dlist_init
+void dlist_init(DList *list, void (*destroy)(void *data)) {
+    // Initialise the list.
+    list->size = 0;
+    list->destroy = destroy;
+    list->head = NULL;
+    list->tail = NULL;
+    return;
+}
+
+// dlist_destroy
+void dlist_destroy(DList *list) {
+    void *data;
+    // Remove each element.
+    while (dlist_size(list) > 0) {
+        if (dlist_remove(list, dlist_tail(list), (void **)&data) == 0 && list->destroy != NULL) {
+            // Call a user-defined function fto free dynamically allocated data.
+            list->destroy(data);
+        }
+    }
+    // No operations are allowed now, but clear the structure as a precaution.
+    memset(list, 0, sizeof(DList));
+    return;
+}
+
+// dlist_ins_next
+int dlist_ins_next(DList *list, DListElmt *element, const void *data) {
+    DListElmt *new_element;
+    // Do not allow a NULL element unless the list is empty.
+    if (element == NULL && dlist_size(list) != 0) {
+        return -1;
+    }
+    // Allocate storage for the element.
+    if ((new_element = (DListElmt *)malloc(sizeof(DListElmt))) == NULL) {
+        return -1;
+    }
+    // Insert the new element into the list.
+    new_element->data = (void *)data;
+
+    if (dlist_size(list) == 0) {
+        // Handle insertion when the list is empty.
+        list->head = new_element;
+        list->head->prev = NULL;
+        list->head->next = NULL;
+        list->tail = new_element;
+    } else {
+        // Handle insertion when the list is not empty.
+        new_element->next = element->next;
+        new_element->prev = element;
+
+        if (element->next == NULL) {
+            list->tail = new_element;
+        } else {
+            element->next->prev = new_element;
+        }
+        element->next = new_element;
+    }
+    // Adjust the size of the list to account for the inserted element.
+    list->size++;
+    return 0;
+}
+// dlist_ins_prev
+int dlist_ins_prev(DList *list, DListElmt *element, const void *data) {
+    DListElmt *new_element;
+    // Do not allow a NULL element unless the list is empty.
+    if (element == NULL && dlist_size(list) != 0) {
+        return -1;
+    }
+    // Allocate storage to be managed by the abstract datatype.
+    if ((new_element = (DListElmt *)malloc(sizeof(DListElmt))) == NULL) {
+        return -1;
+    }
+    // Insert the new element into the list.
+    new_element->data = (void *)data;
+    if (dlist_size(list) == 0) {
+        // Handle insertion when the list is empty.
+        list->head = new_element;
+        list->head->prev = NULL;
+        list->head->next = NULL;
+        list->tail = new_element;
+    } else {
+        // Handle insertion when the list is not empty.
+        new_element->next = element;
+        new_element->prev = element->prev;
+        
+        if (element->prev == NULL) {
+            list->head = new_element;
+        } else {
+            element->prev->next = new_element;
+        }
+        element->prev = new_element;
+    }
+    // Adjust the size of the list to account for the new element.
+    list->size++;
+    return 0;
+}
+// dlist_remove
+int dlist_remove(DList *list, DListElmt *element, void **data) {
+    // Do not allow a NULL element or removal from an empty list.
+    if (element == NULL || dlist_size(list) == 0) {
+        return -1;
+    }
+    // Remove the element from the list.
+    *data = element->data;
+    if (element == list->head) {
+        // Handle removal from the head of the list.
+        list->head = element->next;
+        if (list->head == NULL) {
+            list->tail = NULL;
+        } else {
+            element->next->prev = NULL;
+        }
+    } else {
+        // Handle removal from other than the head of the list.
+        element->prev->next = element->next;
+        if (element->next == NULL) {
+            list->tail = element->prev;
+        } else {
+            element->next->prev = element->prev;
+        }
+    }
+    // Free the storage allocated by the abstract datatype.
+    free(element);
+    // Adjust the size of the list to account for the removed element.
+    list->size--;
+    return 0;
+}
+```
