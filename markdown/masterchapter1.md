@@ -30,6 +30,7 @@ When one thinks of data structures, one normally thinks of certain actions, or o
 
 ## An Introduction to Algorithms
 Algorithms are well-defined procedures for solving problems. In computing, algorithms are essential because they serve as the systematic procedures that computers require. A good algorithm is like using the right tool in a workshop. As with data structures, three reasons for using formal algorithms are;
+
 - Efficiency - Certain types of problems occur often in computing, researchers have found efficient ways of dsolving them over time.
 - Abstraction - Algorithms provide a level of abstraction in solving problems because many seemingly complicated problems can be distilled into simpler ones for which well-known algorithms exist.
 - Reusability - Algorithms are often reusable in many different situations. Since many well-known algorithms solve problems that are generalisations of more complicated ones, and since many complicated problems can be distilled into simpler ones, an efficient means of solving certain simpler problems potentially lets us solve many others.

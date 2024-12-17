@@ -48,7 +48,7 @@ void list_init(List *list, void (*destry)(void *data));
 
 **Description:** Initialises the linked list specified by ```list```. This operation must be called for a linked list before the list can be used with any other operation. The ```destroy``` arguments provides a way to free dynamically allocated data when ```list_destroy``` is called. For example, if the list contains data dynamically allocated using ```malloc```, ```destroy``` should be set to free to free the data as the linked list is destroyed. For structured data containing several dynamically allocated members, ```destroy``` should be set to a user-defined function that calls free for each dynamically allocated member as well as for the structure itself. For a liniked list containing data that should not be freed, ```destroy``` should be set to NULL.
 
-**Complexity:** $ O(1) $
+**Complexity:** $ \mathcal{O}(1) $
 
 **list_destroy**
 ```c
@@ -58,7 +58,7 @@ void list_destroy(List *list);
 
 **Description:** Destroys the linked list specified by ```list```. No other operations are permitted after calling ```list_destroy``` unless ```list_init``` is called again. The ```list_destroy``` operation removes all elements from a linked list and calls the function passed as ```destroy``` to ```list_init``` once for each element as it is removed, provided ```destroy``` was not set to NULL.
 
-**Complexity:** $ O(n) $, where $n$ is the number of elements in the linked list.
+**Complexity:** $ \mathcal{O}(n) $, where $n$ is the number of elements in the linked list.
 
 **list_ins_next**
 ```c
@@ -68,7 +68,7 @@ int list_ins_next(List *list, ListElmt *element, const void *data);
 
 **Description:** Inserts an element just after ```element``` in the linked list specified by ```list```. If ```element``` is NULL, the new element is inserted at the head of the list. The new element contains a pointer to ```data```, so the memoryreferenced by ```data``` should remain valid as long as the element remains in the list. It is the responsibility of teh caller to manage the storage associated with ```data```.
 
-**Complexity:** $O(1)$
+**Complexity:** $\mathcal{O}(1)$
 
 **list_rem_next**
 ```c
@@ -78,7 +78,7 @@ int list_rem_next(List *list, ListElmt *element, void **data);
 
 **Description:** Removes the element just after ```element``` from the linked list specified by ```list```. If ```element``` is NULL, the element at the head of the list is removed. Upon return, ```data``` points to the data stored in the element that was removed It is the responsibility of the caller to manage the storage associated with the data.
 
-**Complexity:** $O(1)$
+**Complexity:** $\mathcal{O}(1)$
 
 **list_size**
 ```c
@@ -88,7 +88,7 @@ int list_size(const List *list);
 
 **Description:** Macro that evaluates the number of elmenents in the linked list specified by ```list```.
 
-**Complexity:** $O(1)$
+**Complexity:** $\mathcal{O}(1)$
 
 **list_head**
 ```c
@@ -98,7 +98,7 @@ ListElmt *list_head(const List *list);
 
 **Description:** Macro that evaluates to the element at the head of the linked list specified by ```list```.
 
-**Complexity:** $O(1)$
+**Complexity:** $\mathcal{O}(1)$
 
 **list_tail**
 ```c
@@ -108,7 +108,7 @@ ListElmt *list_tail(const List *list);
 
 **Description:** Macro that evaluates to the element at the tail of the linked list specified by ```list```.
 
-**Complexity:** $O(1)$
+**Complexity:** $\mathcal{O}(1)$
 
 **list_is_head**
 ```c
@@ -118,7 +118,7 @@ int list_is_head(const ListElmt *element);
 
 **Description:** Macro that determines whether the element specified as ```element``` is at the head of a linked list.
 
-**Complexity:** $O(1)$
+**Complexity:** $\mathcal{O}(1)$
 
 **list_is_tail**
 ```c
@@ -128,7 +128,7 @@ int list_is_tail(const ListElmt *element);
 
 **Description:** Macro that determines whether the element specified as ```element``` is at the tail of a linked list.
 
-**Complexity:** $O(1)$
+**Complexity:** $\mathcal{O}(1)$
 
 **list_data**
 ```c
@@ -138,7 +138,7 @@ void *list_data(const ListElmt *element);
 
 **Description:** Macro that evaluates to the data stored in the element of a linked list specified by ```element```.
 
-**Complexity:** $O(1)$
+**Complexity:** $\mathcal{O}(1)$
 
 **list_next**
 ```c
@@ -148,7 +148,7 @@ ListElmt *list_next(const ListElmt *element);
 
 **Description:** Macro that evaluates to the element of a linked list following the element specified by ```element```.
 
-**Complexity:** $O(1)$
+**Complexity:** $\mathcal{O}(1)$
 
 ## Implementation and Analysis of Linked Lists
 Recall that each element of a linked list consists of two parts: a data member and a pointer to the next element in the list. The structure ```ListElmt``` represents an individual element of a linked list As you would expect, this structure has two members that correspond to those just mentioned. The structure ```List``` is the linked list data structure. This structure consists of five members: ```size``` is the number of elements in the list, ```match``` is a member not used by linked lists but by datatypes that will be derived later from linked lists, ```destroy``` is the encapsulated destroy function passed to ```list_init```, ```head``` is a pointer to the first of the linked element, and ```tail``` is a pointer to the tail element.
@@ -190,12 +190,12 @@ int list_rem_next(List *list, ListElmt *element, void **data);
 #### list_init
 The ```list_init``` operation initialises a linked list so that it can be used in other operations. Initialising a linked list is a simple operation in which the ```size``` member of the list is set to 0, the ```destroy``` member to ```destroy```, and the ```head``` and ```tail``` pointers to NULL.
 
-The runtime complexity of ```list_init``` is $O(1)$ because all of the steps in initialising a linked list run in a constant amount of time.
+The runtime complexity of ```list_init``` is $\mathcal{O}(1)$ because all of the steps in initialising a linked list run in a constant amount of time.
 
 #### list_destroy
 The ```list_destroy``` operation destroys a linked lists. Primarily this means removing all elements from the list. The function passed as ```destroy``` to ```list_init``` is called once for each element as it is removed, provided ```destroy``` was not set to NULL.
 
-The runtime complexity of list_destroy is $O(n)$, where n is teh number of element in the list This is because the $O(1)$ operation ```list_rem_next``` must be called once for each element.
+The runtime complexity of list_destroy is $\mathcal{O}(n)$, where n is teh number of element in the list This is because the $\mathcal{O}(1)$ operation ```list_rem_next``` must be called once for each element.
 
 #### list_ins_next
 The ```list_ins_next``` operation inserts an element into a linked lists just after a specified element. The call sets the new element to point to the data passed by the caller. The actual process of inserting the new element into the list is a simple one, but it does require some care. There are two cases to consider: insertion at the head of the list and insertion elsewhere.
@@ -203,22 +203,22 @@ The ```list_ins_next``` operation inserts an element into a linked lists just af
 Generally, to insert an element into a linked list, we set the ```next``` pointer of the new element to point to the element it is going to precede, and we set the ```next``` pointer of the element that will precede the new element to point to the new element. However, when inserting at the head of a list, there is no element that will precede the new element. Thus, in this case, we set the ```next``` pointer of the new element to the current head of the list, then reset the head of the list to point to the new element. Recall from the interface design in the previous section that passing NULL for ```element``` indicates that the new element should be inserted at the head. In addition to these tasks, whenever we insert an element at the tail of the list, we must update the ```tail``` member of the list data structure to point to the new tail. Last, we update the size of the list by incremmenting its ```size``` member.
 ![insertelementLL](/static/images/insertelementLL.png)
 
-The runtime complexity of ```list_ins_next``` is $O(1)$ because all of the steps in inserting an element into a linked list run in a constant amount of time.
+The runtime complexity of ```list_ins_next``` is $\mathcal{O}(1)$ because all of the steps in inserting an element into a linked list run in a constant amount of time.
 
 #### list_rem_next
-The ```list_rem_next``` operation removes from a linked list the element just after a specified element. The reasons for removing the element just after, as opposed to the element itself is because, in the singly-linked list and circular list implementations, each element does not have a pointer to the one preceding it Therefore, we cannot set the preceding element's next pointer to the element after the one being removed An alternative approach to the one we selected would be to start at the head element and traverse the list, keeping track of each element preceding the next until the element to be removed is encountered. However, this solution is unattractive because the runtime complexity of removing an element from a singly-linked list or circular list degrades to $O(n)$. Another approach would be to copy the data of the element following the specified element into the one specified and then remove the following element. However, this seemingly benign $O(1)$ approach generates the dangerous side effect of rendering a pointer into the list invalid. This could be a surprise to a developer maintaining a pointer to the element after the one thought to be removed! The approach we selected, then, was to remove the element after the specified one The disadvantage of this approach is its inconsistency with the ```dlist_remove``` operation of the doubly-linked list implementation. However, this is addressed by the naming convention, using ```_rem_next``` as the suffix for removing an element after the one specified, and ```_remove``` to indicate that the specified element itself will be removed. In a doubly-linked list, recall that we can remove precisely the element specified because each element has a pointer to the one that precedes it.
+The ```list_rem_next``` operation removes from a linked list the element just after a specified element. The reasons for removing the element just after, as opposed to the element itself is because, in the singly-linked list and circular list implementations, each element does not have a pointer to the one preceding it Therefore, we cannot set the preceding element's next pointer to the element after the one being removed An alternative approach to the one we selected would be to start at the head element and traverse the list, keeping track of each element preceding the next until the element to be removed is encountered. However, this solution is unattractive because the runtime complexity of removing an element from a singly-linked list or circular list degrades to $\mathcal{O}(n)$. Another approach would be to copy the data of the element following the specified element into the one specified and then remove the following element. However, this seemingly benign $\mathcal{O}(1)$ approach generates the dangerous side effect of rendering a pointer into the list invalid. This could be a surprise to a developer maintaining a pointer to the element after the one thought to be removed! The approach we selected, then, was to remove the element after the specified one The disadvantage of this approach is its inconsistency with the ```dlist_remove``` operation of the doubly-linked list implementation. However, this is addressed by the naming convention, using ```_rem_next``` as the suffix for removing an element after the one specified, and ```_remove``` to indicate that the specified element itself will be removed. In a doubly-linked list, recall that we can remove precisely the element specified because each element has a pointer to the one that precedes it.
 
 As with inserting an element, this call requires consideration of two cases: removing an element from the head of the list and removing one elsewhere.
 
 The actual process of removing the element from the list is a simple one, but it too requires some care. Generally, to remove an element from a linked list, we set the ```next``` pointer of the element preceding the one being removed to point to the element after the element being removed. However, when removing an element from the head of a list, there is no element that precedes the element being removed. Thus, in this case, we set the head of the list to point to the elmeent after the one being removed. As with insertion, NULL serves nicely as a sentinel passed in ```element``` to indicate that the element at the head of the list should be removed. In addition to these tasks, whenever we remove the element at the tail of the list, we must update the ```tail``` member of the list data structure to point to the new tail, or to NULL if removing the element has caused the list to become empty. Last, we update the size of the list by decreasing the ```size``` member by 1. Upon return, ```data``` points to the data from the element removed.
 ![removeelement](/static/images/removeelement.png)
 
-The runtime complexity of ```list_rem_next``` is $O(1)$ because all of the steps in removing an element from a linked list run in a constant amount of time.
+The runtime complexity of ```list_rem_next``` is $\mathcal{O}(1)$ because all of the steps in removing an element from a linked list run in a constant amount of time.
 
 #### list_size, list_head, list_tail, list_is_tail, list_data, and list_next
 These macros implement some of the simpler linked list operations. Generally, they provide an interface for accessing and testing members of the ```List``` and ```ListElmt``` structures.
 
-The runtime complexity of these operations is $O(1)$ because accessing and testing members of a structure are simple tasks that run in a constant amount of time.
+The runtime complexity of these operations is $\mathcal{O}(1)$ because accessing and testing members of a structure are simple tasks that run in a constant amount of time.
 
 ```c
 // Implementation of the Linked List Abstract Datatype
@@ -376,7 +376,7 @@ void dlist_init(DList *list, void (*destroy)(void *data));
 
 **Description:** Initialises the doubly-linked list specified by ```list```. This operation must be called for a doubly-linked list before the list can be used with any other operation. The ```destroy``` argument provides a way to free dynamically allocated data when ```dlist_destroy``` is called. It works in a manner similar to that described for ```list_destroy```. For a doubly-linked list containing data that should not be freed, ```destroy``` should be set to NULL.
 
-**Complexity:** O(1)
+**Complexity:** \mathcal{O}(1)
 
 
 
