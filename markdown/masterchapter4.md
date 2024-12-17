@@ -14,7 +14,7 @@ This chapter covers:
     
 - *$O$-notation*
     - The most common notation used to formally express an algorithm's performance. $O$-notation is used to express the upper bound of a function within a constant factor.
-    
+
 - *Computational complexity*
     - The growth rate of the resources (usually time) an algorithm requries with respect to the size of the data it processes. $O$-notation is a formal expression of an algorithm's complexity.
 
@@ -30,7 +30,7 @@ A basic understanding of how an algorithm performs in all cases is important, bu
 
 Although worst-case analysis is the metric for many algorithms, it is worth noting that there are exceptions. Sometimes special circumstances let us base performance on the average case. For example, randomised algorithms such as quicksort use principles of probability to virtually guarantee average-case performance.
 
-## O-Notation
+## $O$-Notation
 $O$-notation is the most common notation used to express an algorithm's performance in a formal manner. Formally, $O$-notation expresses the upper bound of a function within a constant factor. Specifically, if $g(n)$ is an upper bound of $f(n)$, then for some constant $c$, it is possible to find a value of $n$, call it $n_0$, for which any value of $n >= n_0$ will result in $f(n) <= cg(n)$.
 
 Normally we express an algorithm's performance as a function of the size of the data it processes. That is, for some data of size $n$, we describe its performance with some function $f(n)$. However, while in many cases we can determine $f$ exactly, usually it is not necessary to be this precise Primarily we are interested only in the growth rate of $f$, which describes how quickly the algorithm's performance will degrade as the size of the data it processes becomes arbitrarily large. An algorithm's growth rate, or order of growth, is significant because ultimately it describes how efficient the algorithm inputs. $O$-notation reflects an algorithm's order of growth.
