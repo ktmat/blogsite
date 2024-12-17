@@ -10,6 +10,7 @@ MetaOgURL: https://matolat.com/masteringchap1
 
 ## An Introduction to Data Structures
 Data comes in all shapes and sizes, but often it can be organised the same way. A list is one example of a data structure, however, there are many other ways to organise data in computing. These are;
+
 - Linked Lists
 - Stacks
 - Queues
