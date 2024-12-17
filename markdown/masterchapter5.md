@@ -20,6 +20,7 @@ There are many different types of linked lists.
     - Linked lists in which the last element is linked to the first instead of being set to NULL. This structure allows the list to be traversed in a circular fashion.
 
 Some applications of linked lists are:
+
 - Mailing lists
 - Scrolled lists
 - Polynomials
