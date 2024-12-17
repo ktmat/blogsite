@@ -35,7 +35,7 @@ $\mathcal{O}$-notation is the most common notation used to express an algorithm'
 
 Normally we express an algorithm's performance as a function of the size of the data it processes. That is, for some data of size $n$, we describe its performance with some function $f(n)$. However, while in many cases we can determine $f$ exactly, usually it is not necessary to be this precise Primarily we are interested only in the growth rate of $f$, which describes how quickly the algorithm's performance will degrade as the size of the data it processes becomes arbitrarily large. An algorithm's growth rate, or order of growth, is significant because ultimately it describes how efficient the algorithm inputs. $\mathcal{O}$-notation reflects an algorithm's order of growth.
 
-### Simple Rules for \mathcal{O}-Notation
+### Simple Rules for $\mathcal{O}$-Notation
 When we look at some function $f(n)$ in terms of its growth rate, a few things become apparent. First, we can ignore constant terms because as the value of n becomes larger and larger, eventually constant terms will become insignificant. Second, we can ignore constant multipliers of terms because they too will become insignificant as the value of $n$ increases. Finally, we need only consider the highest-order term because, again, as $n$ increases, higher-order terms quickly outweight the lower-order ones. These ideas are formalised in the following simple rules for expressing functions in $\mathcal{O}$-notation.
 
 - Constant terms are expressed as $\mathcal{O}(1)$ When analysing the running time of an algorithm, apply this rule when you have a task that you know will execute in a certain amount of time regardless of the size of the data it processes. Formally stated, for some constant $c$:
