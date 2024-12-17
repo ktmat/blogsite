@@ -330,7 +330,7 @@ func extractHeaders(content []byte) []string {
 }
 
 func mdToHTML(md []byte) []byte {
-	extensions := parser.CommonExtensions | parser.AutoHeadingIDs | parser.Footnotes
+	extensions := parser.CommonExtensions | parser.AutoHeadingIDs | parser.Footnotes | parser.MathJax
 	parser := parser.NewWithExtensions(extensions)
 
 	opts := html.RendererOptions{
@@ -340,6 +340,9 @@ func mdToHTML(md []byte) []byte {
 			<link rel="stylesheet" href="/static/css/monokai-sublime.min.css">
 			<script src="/static/js/highlight.min.js"></script>
 			<script>hljs.highlightAll();</script>
+			<script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
+        </script>
 		`),
 	}
 	renderer := html.NewRenderer(opts)

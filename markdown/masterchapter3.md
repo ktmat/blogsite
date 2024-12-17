@@ -8,10 +8,14 @@ MetaOgURL: https://matolat.com/masteringchap3
 ---
 # Chapter 3 - Recursion
 ## Basic Recursion
-Let's consider a problem that normally we might not think of in a recursive way. Suppose we would like to compute the factorial of a number *n*. *n!* is the product of all numbers from *n* down to 1. One way to calculate this is to loop through each number and multiply it with the product of all preceding numbers This is an iterative approach, which can be defined formally as:
+Let's consider a problem that normally we might not think of in a recursive way. Suppose we would like to compute the factorial of a number $n$. $n!$ is the product of all numbers from $n$ down to $1$. One way to calculate this is to loop through each number and multiply it with the product of all preceding numbers This is an iterative approach, which can be defined formally as:
+
 $$
+
 n! = (n)(n - 1)(n - 2)...
+
 $$
+
 Another way to look at this problem is to define $n!$ as the product of smaller factorials. To do this, we define $n!$ as $n$ times the factorial of $n - 1$. Solving $(n - 1)!$ is the same problem as $n!$, only a little smaller. If we then think of $(n - 1)!$ as $n - 1$ times $(n - 2)!$, $(n - 2)!$ as $n - 2$ times $(n - 3)!$, and so forth until $n = 1$, we end up computing $n!$. This is a *recursive* approach.
 
 Here is an implementation of a function for computing factorials recursively:
