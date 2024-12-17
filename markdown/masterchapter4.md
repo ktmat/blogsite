@@ -10,10 +10,10 @@ MetaOgURL: https://matolat.com/masteringchap4
 This chapter covers:
 - *Worst-case analysis*
     - The metric used by which most algorithms are compared Other cases we might consider are the average case and the best case. However, worst-case analysis usually offers several advantages.
-- *O-notation*
-    - The most common notation used to formally express an algorithm's performance. O-notation is used to express the upper bound of a function within a constant factor.
+- *$O$-notation*
+    - The most common notation used to formally express an algorithm's performance. $O$-notation is used to express the upper bound of a function within a constant factor.
 - *Computational complexity*
-    - The growth rate of the resources (usually time) an algorithm requries with respect to the size of the data it processes. O-notation is a formal expression of an algorithm's complexity.
+    - The growth rate of the resources (usually time) an algorithm requries with respect to the size of the data it processes. $O$-notation is a formal expression of an algorithm's complexity.
 
 ## Worst-Case Analysis
 Most algorithms do not perform the same in all cases; normally an algorithm's performance varies with the data passed to it. Typically, three cases are recognised: the best case, worst case, and average case. For any algorithm, understanding what constitutes each of these cases is an important part of analysis because performance can vary significantly between them. Consider even a simple algorithm such as *linear search*. Linear search is a natural but inneficient search technique in which we look for an element simply by traversing a set from one end to the other. In the best case, the element we are looking for is the first element we inspect, so we end up traversing only a single element. In the worst case, however, the desired element is the last one we inspect, in which case we end up traversing all of the elements. On average, we can expect to find the element somewhere in the middle.
@@ -28,21 +28,21 @@ A basic understanding of how an algorithm performs in all cases is important, bu
 Although worst-case analysis is the metric for many algorithms, it is worth noting that there are exceptions. Sometimes special circumstances let us base performance on the average case. For example, randomised algorithms such as quicksort use principles of probability to virtually guarantee average-case performance.
 
 ## O-Notation
-O-notation is the most common notation used to express an algorithm's performance in a formal manner. Formally, O-notation expresses the upper bound of a function within a constant factor. Specifically, if g(n) is an upper bound of f(n), then for some constant c, it is possible to find a value of n, call it n0, for which any value of n >= n0 will result in f(n) <= cg(n).
+$O$-notation is the most common notation used to express an algorithm's performance in a formal manner. Formally, $O$-notation expresses the upper bound of a function within a constant factor. Specifically, if $g(n)$ is an upper bound of $f(n)$, then for some constant $c$, it is possible to find a value of $n$, call it $n_0$, for which any value of $n >= n_0$ will result in $f(n) <= cg(n)$.
 
-Normally we express an algorithm's performance as a function of the size of the data it processes. That is, for some data of size n, we describe its performance with some function f(n). However, while in many cases we can determine f exactly, usually it is not necessary to be this precise Primarily we are interested only in the growth rate of f, which describes how quickly the algorithm's performance will degrade as the size of the data it processes becomes arbitrarily large. An algorithm's growth rate, or order of growth, is significant because ultimately it describes how efficient the algorithm inputs. O-notation reflects an algorithm's order of growth.
+Normally we express an algorithm's performance as a function of the size of the data it processes. That is, for some data of size $n$, we describe its performance with some function $f(n)$. However, while in many cases we can determine $f$ exactly, usually it is not necessary to be this precise Primarily we are interested only in the growth rate of $f$, which describes how quickly the algorithm's performance will degrade as the size of the data it processes becomes arbitrarily large. An algorithm's growth rate, or order of growth, is significant because ultimately it describes how efficient the algorithm inputs. $O$-notation reflects an algorithm's order of growth.
 
 ### Simple Rules for O-Notation
-When we look at some function f(n) in terms of its growth rate, a few things become apparent. First, we can ignore constant terms because as the value of n becomes larger and larger, eventually constant terms will become insignificant. Second, we can ignore constant multipliers of terms because they too will become insignificant as the value of n increases. Finally, we need only consider the highest-order term because, again, as n increases, higher-order terms quickjly outweight the lower-order ones. These ideas are formalised in the following simple rules for expressing functions in O-notation.
+When we look at some function $f(n)$ in terms of its growth rate, a few things become apparent. First, we can ignore constant terms because as the value of n becomes larger and larger, eventually constant terms will become insignificant. Second, we can ignore constant multipliers of terms because they too will become insignificant as the value of $n$ increases. Finally, we need only consider the highest-order term because, again, as $n$ increases, higher-order terms quickjly outweight the lower-order ones. These ideas are formalised in the following simple rules for expressing functions in $O$-notation.
 
-- Constant terms are expressed as O(1) When analysing the running time of an algorithm, apply this rule when you have a task that you know will execute in a certain amount of time regardless of the size of the data it processes. Formally stated, for some constant c:
-    - O(c) = O(1)
+- Constant terms are expressed as $O(1)$ When analysing the running time of an algorithm, apply this rule when you have a task that you know will execute in a certain amount of time regardless of the size of the data it processes. Formally stated, for some constant $c$:
+    - $O(c) = O(1)$
 
-- Multiplicative constants are omitted. When analysing the running time of an algorithm, apply this rule when you have a number of tasks that all execute in the same amount of time. For example, if three tasks each run in time T(n) = n, the result is O(3n), which simplifies to O(n). Formally stated, for some constant c:
-    - O(cT) = cO(T) = O(T)
+- Multiplicative constants are omitted. When analysing the running time of an algorithm, apply this rule when you have a number of tasks that all execute in the same amount of time. For example, if three tasks each run in time $T(n) = n$, the result is $O(3n)$, which simplifies to $O(n)$. Formally stated, for some constant $c$:
+    - $O(cT) = cO(T) = O(T)$
 
-- Addition is performed by taking the maximum. When analysing the running time of an algoirithm, apply this rule when one task is executed after another For example, if T1(n) = n, and T2(n) = n^2 describe two tasks executed sequentially, the result is O(n) + O(n^2), which simplifies to O(n^2). Formally stated:
-    - O(T1) + O(T2) = O(T1 + T2) = max(O(T1), O(T2))
+- Addition is performed by taking the maximum. When analysing the running time of an algoirithm, apply this rule when one task is executed after another For example, if $T_1(n) = n$, and $T_2(n) = n^2$ describe two tasks executed sequentially, the result is $O(n) + O(n^2)$, which simplifies to $O(n^2)$. Formally stated:
+    - $O(T_1) + O(T_2) = O(T_1 + T_2) = max(O(T_1), O(T_2))$
 
-- Multiplication is not changed but often is rewritten more compactly. When analysing the running time of an algorithm, apply this rule when one task causes another to be executed some number of times for each iteration of itself. For example, in a nested loop whose outer iterations are described by T1 and whose inner iterations by T2, if T1(n) = n and T2(n) = n, the result is O(n)O(n), or O(n^2). Formally stated:
-    - O(T1)O(T2) = O(T1T2)
+- Multiplication is not changed but often is rewritten more compactly. When analysing the running time of an algorithm, apply this rule when one task causes another to be executed some number of times for each iteration of itself. For example, in a nested loop whose outer iterations are described by $T_1$ and whose inner iterations by $T_2$, if $T_1(n) = n$ and $T_2(n) = n$, the result is $O(n)O(n)$, or $O(n^2)$. Formally stated:
+    - $O(T_1)O(T_2) = O(T_1T_2)$

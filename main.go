@@ -466,4 +466,3 @@ func dict(values ...interface{}) (map[string]interface{}, error) {
 	}
 	return dict, nil
 }
-
