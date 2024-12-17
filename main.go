@@ -251,6 +251,7 @@ func setupRoutes(r *gin.Engine) {
 			log.Printf("Warning: Post titled '%s' has an empty slug and will not be accessible via a unique URL.\n", localPost.Title)
 		}
 	}
+	r.Use(ContentSecurityPolicyMiddleware())
 }
 
 func loadMarkdownPosts(dir string) ([]BlogPost, error) {
@@ -349,6 +350,18 @@ func mdToHTML(md []byte) []byte {
 	output := markdown.Render(doc, renderer)
 
 	return output
+}
+
+func ContentSecurityPolicyMiddleware() gin.HandlerFunc {
+    return func(c *gin.Context) {
+        c.Header("Content-Security-Policy", 
+            "default-src 'self'; " +
+            "style-src 'self' https://cdnjs.cloudflare.com; " +
+            "script-src 'self' https://cdnjs.cloudflare.com; " +
+            "font-src 'self' https://cdnjs.cloudflare.com; " +
+            "img-src 'self' data:")
+        c.Next()
+    }
 }
 
 func parseMetadata(metadata string) (
