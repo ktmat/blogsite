@@ -30,7 +30,7 @@ import (
 	"github.com/gomarkdown/markdown"
 	"github.com/gomarkdown/markdown/html"
 	"github.com/gomarkdown/markdown/parser"
-	//"github.com/microcosm-cc/bluemonday"
+	"github.com/microcosm-cc/bluemonday"
 )
 
 type BlogPost struct {
@@ -352,11 +352,10 @@ func mdToHTML(md []byte) []byte {
 
 	output := markdown.Render(doc, renderer)
 
-	//sanitiser := bluemonday.UGCPolicy()
-	//sanitisedOutput := sanitiser.SanitizeBytes(output)
+	sanitiser := bluemonday.UGCPolicy()
+	sanitisedOutput := sanitiser.SanitizeBytes(output)
 
-	//return sanitisedOutput
-	return output
+	return sanitisedOutput
 }
 
 func parseMetadata(metadata string) (
