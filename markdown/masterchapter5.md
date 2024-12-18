@@ -377,7 +377,7 @@ void dlist_init(DList *list, void (*destroy)(void *data));
 
 **Description:** Initialises the doubly-linked list specified by ```list```. This operation must be called for a doubly-linked list before the list can be used with any other operation. The ```destroy``` argument provides a way to free dynamically allocated data when ```dlist_destroy``` is called. It works in a manner similar to that described for ```list_destroy```. For a doubly-linked list containing data that should not be freed, ```destroy``` should be set to NULL.
 
-**Complexity:** \mathcal{O}(1)
+**Complexity:** $\mathcal{O}(1)$
 
 
 
