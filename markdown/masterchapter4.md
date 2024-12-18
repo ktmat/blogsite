@@ -16,7 +16,7 @@ This chapter covers:
     - The most common notation used to formally express an algorithm's performance. $\mathcal{O}$-notation is used to express the upper bound of a function within a constant factor.
 
 - *Computational complexity*
-    - The growth rate of the resources (usually time) an algorithm requries with respect to the size of the data it processes. $O$-notation is a formal expression of an algorithm's complexity.
+    - The growth rate of the resources (usually time) an algorithm requries with respect to the size of the data it processes. $\mathcal{O}$-notation is a formal expression of an algorithm's complexity.
 
 ## Worst-Case Analysis
 Most algorithms do not perform the same in all cases; normally an algorithm's performance varies with the data passed to it. Typically, three cases are recognised: the best case, worst case, and average case. For any algorithm, understanding what constitutes each of these cases is an important part of analysis because performance can vary significantly between them. Consider even a simple algorithm such as *linear search*. Linear search is a natural but inneficient search technique in which we look for an element simply by traversing a set from one end to the other. In the best case, the element we are looking for is the first element we inspect, so we end up traversing only a single element. In the worst case, however, the desired element is the last one we inspect, in which case we end up traversing all of the elements. On average, we can expect to find the element somewhere in the middle.
