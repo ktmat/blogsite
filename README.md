@@ -13,9 +13,7 @@ The website is intended for me to collate my thoughts on a variety of topics. Th
 - Computing
 
 ## TODO
-1. Checkout Ponzu as a content management system.
-
-2. Need to figure out logins through whatever the [ACP](https://acp.us/) does.
+1. Actually get started on my damn projects.
 
 ## Questions?
 
