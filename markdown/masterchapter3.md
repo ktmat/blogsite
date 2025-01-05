@@ -1,5 +1,5 @@
 Title: Relearning C - Mastering Algorithms with C - Chapter 3
-Slug: Relearning C - Mastering Algorithms with C - Chapter 3
+Slug: masteringchap3
 Parent: C Programming
 Order: 13
 MetaPropertyTitle: Relearning C - Mastering Algorithms with C - Chapter 3 - Notes
@@ -12,7 +12,7 @@ Let's consider a problem that normally we might not think of in a recursive way.
 
 $$
 
-n! = (n)(n - 1)(n - 2)...
+n! = n(n - 1)(n - 2)...
 
 $$
 

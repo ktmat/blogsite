@@ -1,5 +1,5 @@
 Title: Relearning C - Chapter 1
-Slug: Relearning C - Chapter 1
+Slug: cchap1
 Parent: C Programming
 Order: 6
 MetaPropertyTitle: Relearning C - Chapter 1 Notes

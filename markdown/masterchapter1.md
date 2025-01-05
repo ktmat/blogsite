@@ -1,5 +1,5 @@
 Title: Relearning C - Mastering Algorithms with C - Chapter 1
-Slug: Relearning C - Mastering Algorithms with C - Chapter 1
+Slug: masteringchap1
 Parent: C Programming
 Order: 11
 MetaPropertyTitle: Relearning C - Mastering Algorithms with C - Chapter 1 - Notes
