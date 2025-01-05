@@ -15,6 +15,4 @@ Now that I have deployed MathJax on this website, I am able to write my mathemat
 
 Here is the book that I will be studying from:
 
-![openstaxcalc3text](/static/images/calc3.png)
-
 [Openstax - Calculus Volume III](https://openstax.org/details/books/calculus-volume-3)
