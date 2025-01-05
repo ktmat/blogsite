@@ -23,7 +23,7 @@ The main function is declared with the return type of an **int**. The return val
 
 
 ## 1.2 Variables and Arithmetic Expressions
-The next program uses the formula C = (5/9)(F-32) to print the following table of Fahrenheit temperatures and their centigrade or Celsius equivalents.
+The next program uses the formula $C = (5/9)(F - 32)$ to print the following table of Fahrenheit temperatures and their centigrade or Celsius equivalents.
 
 ```
  1 -17
