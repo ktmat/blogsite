@@ -56,5 +56,4 @@ The following diagram shows the organisation the Party, and corporations.
 
 In the large state-owned-enterprises, the Party Secretary appoints the top executives and directors, often simply relaying orders from the Communist Party of China's Central Organisational Department, and effectively exercising a leading role in the company. Thus, significant overlap between the Party committee or group with traditional corporate structures. Where the two structures diverge is that real power flows through the party channels, leaving the board and formal corporate top executives with scant real authority.
 
-![diagram](/static/images/Corporate Party Organisation.png)
-
+![diagram](/static/images/Corporate%20Party%20Organisation.png)
