@@ -155,6 +155,7 @@ ListElmt *list_next(const ListElmt *element);
 Recall that each element of a linked list consists of two parts: a data member and a pointer to the next element in the list. The structure ```ListElmt``` represents an individual element of a linked list As you would expect, this structure has two members that correspond to those just mentioned. The structure ```List``` is the linked list data structure. This structure consists of five members: ```size``` is the number of elements in the list, ```match``` is a member not used by linked lists but by datatypes that will be derived later from linked lists, ```destroy``` is the encapsulated destroy function passed to ```list_init```, ```head``` is a pointer to the first of the linked element, and ```tail``` is a pointer to the tail element.
 
 ```c
+#ifndef LIST_H
 #define LIST_H
 
 #include <stdlib.h>
