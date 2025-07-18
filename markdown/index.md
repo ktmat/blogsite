@@ -8,7 +8,7 @@ MetaOgURL: https://matolat.com/
 ---
 # Welcome to the blog.
 
-This blog is just used for me to dump my thoughts on stuff pertaining to: 
+This blog is currently being used for me to dump my thoughts on stuff pertaining to: 
 
 * Marxism-Leninism and Philosophy
 
@@ -20,9 +20,7 @@ This blog is just used for me to dump my thoughts on stuff pertaining to:
 
 * History
 
-* Multipolarity
-
-New articles are pretty rare at the moment, I am currently trying to read an asortment of new books I have bought. Such as *America Against America* by Wang Huning, and, rereading the Marxism-Leninism classics. Particularly from Lenin and Stalin.
+New articles are pretty rare at the moment. I am currently trying to read an asortment of new books I have bought. Such as; *America Against America* by Wang Huning, and rereading the Marxism-Leninism classics. I am currently studying at university.
 
 <!-- <div class="info-box">
   <p><i class="fa-solid fa-circle-info" style="color: #638be3;"></i>
