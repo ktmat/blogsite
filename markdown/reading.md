@@ -13,6 +13,4 @@ I am currently undertaking the reading of the following:
 
 * [Introduction to the Reading of Hegel (Alexandre Kojève)](https://archive.org/details/introductiontore0000kojv/page/n307/mode/2up)
 
-* [Imperialism: The Highest Stage of Capitalism (Lenin)](https://www.marxists.org/archive/lenin/works/1916/imp-hsc/index.htm)
-
 * [RTSG Publications](https://www.rtsg.media/)
