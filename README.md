@@ -6,8 +6,6 @@ This is a blog for my personal website to be hosted on __matolat.com__.
 
 The website is intended for me to collate my thoughts on a variety of topics. These include:
 
-- Marxism-Leninism
-- Multipolarity
 - Economics
 - History
 - Computing
