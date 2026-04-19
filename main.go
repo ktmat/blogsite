@@ -31,6 +31,8 @@ import (
 	"github.com/gomarkdown/markdown/html"
 	"github.com/gomarkdown/markdown/parser"
 	"github.com/microcosm-cc/bluemonday"
+
+	"github.com/jpillora/ipfilter"
 )
 
 type BlogPost struct {
@@ -192,6 +194,26 @@ func refreshMarkdownData() {
 }
 
 func setupRoutes(r *gin.Engine) {
+
+	// IP Blocking
+	filter := ipfilter.New(ipfilter.Options {
+		BlockedCountries: []string{"ISR", "NZ"},
+		AllowedIPs: []string{},
+		BlockByDefault: false,
+		TrustProxy: true;
+	})
+
+	r.Use(func(c *gin.Context) {
+		clientIP := c.ClientIP()
+
+		if filter.Blocked(clientIP) {
+			c.AbortWithStatusJSON(http.StatusForbidden, gin.H{
+				"error": "Access from your country is not allowed!",
+			})
+			return
+		}
+		c.Next()
+	})
 
 	// HOME PAGE
 	r.GET("/", func(c *gin.Context) {
