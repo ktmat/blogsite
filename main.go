@@ -210,6 +210,7 @@ func setupRoutes(r *gin.Engine) {
 			c.AbortWithStatusJSON(http.StatusForbidden, gin.H{
 				"error": "Access from your country is not allowed!",
 			})
+			log.Printf("Error, Client accessed from: %v", clientIP)
 			return
 		}
 		c.Next()
