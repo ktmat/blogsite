@@ -22,10 +22,11 @@
 body, html {
     height: 100%;
     margin: 0;
-    font-family: 'Montserrat'; /* 'JetBrains Mono', monospace; */
+    font-family: 'Twemoji Country Flags', 'Montserrat', sans-serif; /* 'JetBrains Mono', monospace; */
     background-color: #181c1f;
     color: #cccccc;
     line-height: 1.6;
+
 }
 
 .container {
