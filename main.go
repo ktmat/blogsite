@@ -200,7 +200,7 @@ func setupRoutes(r *gin.Engine) {
 		BlockedCountries: []string{"ISR", "NZ"},
 		AllowedIPs: []string{},
 		BlockByDefault: false,
-		TrustProxy: true;
+		TrustProxy: true,
 	})
 
 	r.Use(func(c *gin.Context) {
