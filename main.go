@@ -197,7 +197,7 @@ func setupRoutes(r *gin.Engine) {
 
 	// IP Blocking
 	filter := ipfilter.New(ipfilter.Options {
-		BlockedCountries: []string{"ISR", "NZ"},
+		BlockedCountries: []string{"ISR"},
 		AllowedIPs: []string{},
 		BlockByDefault: false,
 		TrustProxy: true,
